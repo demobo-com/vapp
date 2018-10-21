@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-import { grey200, white } from 'commonColor';
+import * as commonColor from 'commonColor';
 
 import variables from 'platform';
 
@@ -7,27 +7,37 @@ const { height } = Dimensions.get('window');
 const { headerHeight, statusbarHeight } = variables;
 
 export default {
+  red: commonColor.red,
   contentContainer: {
-    justifyContent: 'center',
+    minHeight: height - headerHeight - statusbarHeight,
+    paddingHorizontal: 16,
+    backgroundColor: commonColor.white,
+    paddingTop: 20,
   },
   content: {
-    backgroundColor: grey200,
+    backgroundColor: commonColor.white,
   },
-  contentView: {
-    backgroundColor: white,
-    minHeight: height - headerHeight - statusbarHeight,
-    justifyContent: 'center',
+
+  limitNote: {
+    fontSize: 16,
+    marginBottom: 5,
   },
-  button: {
-    alignSelf: 'center',
-    marginBottom: 10,
+  importNote: {
+    fontSize: 17,
+    fontWeight: '700',
   },
-  footerTble: {
-    justifyContent: 'center',
-    alignItems: 'center',
+
+  list: {
+    marginTop: 20,
   },
-  generateText: {
-    textAlign: 'center',
-    marginVertical: 10,
+  listItem: {
+    height: 55,
+    marginLeft: 0,
+    paddingRight: 0,
+    justifyContent: 'space-between',
+    borderColor: commonColor.greyer,
+  },
+  label: {
+    fontSize: 17,
   },
 };
