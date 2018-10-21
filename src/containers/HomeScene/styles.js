@@ -22,7 +22,17 @@ export default {
     textAlign: 'center',
     fontWeight: '700',
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 10,
+  },
+
+  imageView: {
+    width: deviceWidth - 32,
+    height: (deviceWidth - 32) * 4 / 7,
+  },
+  image: {
+    width: deviceWidth - 32,
+    height: (deviceWidth - 32) * 4 / 7,
+    position: 'absolute',
   },
 
   rechargeLine: {
