@@ -41,7 +41,8 @@ export default {
     alignItems: 'center',
     paddingTop: 10,
     paddingBottom: 10,
-    marginBottom: 40,
+    marginTop: 10,
+    marginBottom: 20,
   },
   input: {
     borderWidth: 0.5,
