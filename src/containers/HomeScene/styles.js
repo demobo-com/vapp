@@ -1,7 +1,11 @@
 import * as commonColor from 'commonColor';
 import variables from 'platform';
 
-const { deviceHeight, headerHeight } = variables;
+const {
+  deviceHeight,
+  deviceWidth,
+  headerHeight,
+} = variables;
 
 export default {
   contentContainer: {
@@ -27,6 +31,7 @@ export default {
     alignItems: 'center',
     paddingTop: 10,
     paddingBottom: 10,
+    marginBottom: 40,
   },
   input: {
     borderWidth: 0.5,
@@ -39,5 +44,32 @@ export default {
     width: 80,
     alignSelf: 'center',
     justifyContent: 'center',
+  },
+
+  horizontalLine: {
+    backgroundColor: commonColor.greyer,
+    height: 0.5,
+  },
+
+  listItem: {
+    marginLeft: 0,
+    paddingRight: 0,
+    borderColor: commonColor.greyer,
+    justifyContent: 'space-between',
+  },
+  left: {
+    fontSize: 14,
+    width: deviceWidth / 3 - 20,
+  },
+  center: {
+    fontSize: 15,
+    fontWeight: '500',
+    textAlign: 'center',
+    width: deviceWidth / 4 + 20,
+  },
+  right: {
+    fontSize: 14,
+    textAlign: 'right',
+    width: deviceWidth / 3,
   },
 };

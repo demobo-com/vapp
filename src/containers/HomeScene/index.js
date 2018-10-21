@@ -6,7 +6,7 @@
 
 import React from 'react';
 // import PropTypes from 'prop-types';
-// import { Actions } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createPropsSelector } from 'reselect-immutable-helpers';
@@ -17,13 +17,15 @@ import {
   View,
   Button,
   Input,
+  ListItem,
 } from 'native-base';
+import { ScrollView } from 'react-native';
 
 import AppHeader from 'components/AppHeader';
 
 import injectReducer from 'utils/injectReducer';
 
-// import { selectTest } from './selectors';
+import { TRANSACTION_LIST } from './constants';
 // import { defaultAction } from './actions';
 import reducer from './reducer';
 
@@ -82,18 +84,49 @@ export class HomeScene extends React.Component { // eslint-disable-line
     </View>
   )
 
+  renderTransactionList = () => (
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+    >
+      {
+        TRANSACTION_LIST && TRANSACTION_LIST.map((item, index) => {
+          const key = index;
+          return (
+            <ListItem
+              style={styles.listItem}
+              key={key}
+            >
+              <Text style={styles.left}>{item.date}</Text>
+              <Text style={styles.center}>{item.itemType === 'payment' ? '$' : '-$'}{parseFloat(item.amount).toLocaleString()}</Text>
+              <Text style={styles.right}>{item.itemType}</Text>
+            </ListItem>
+          );
+        })
+      }
+    </ScrollView>
+  )
+
   render() {
     const { balance } = this.state;
     return (
       <Container>
-        <AppHeader title="Home Scene" hasLeft={false} hasRight={false} />
+        <AppHeader
+          title=""
+          leftIcon="md-settings"
+          rightIcon="md-menu"
+          leftPress={() => Actions.push('settings')}
+          rightPress={() => Actions.push('history')}
+        />
 
         <Content
           contentContainerStyle={styles.contentContainer}
           style={styles.content}
+          scrollEnabled={false}
         >
-          <Text style={styles.balance}>{balance > 0 ? '$' : '-$'}{Math.abs(balance).toFixed(2)}</Text>
+          <Text style={styles.balance}>{balance > 0 ? '$' : '-$'}{parseFloat(Math.abs(balance).toFixed(2)).toLocaleString()}</Text>
           {this.renderRechargeLine()}
+          <View style={styles.horizontalLine} />
+          {this.renderTransactionList()}
         </Content>
       </Container>
     );

@@ -4,7 +4,7 @@ import { grey200, white } from 'commonColor';
 import variables from 'platform';
 
 const { height } = Dimensions.get('window');
-const { headerHeight, footerHeight, statusbarHeight } = variables;
+const { headerHeight, statusbarHeight } = variables;
 
 export default {
   contentContainer: {
@@ -15,7 +15,7 @@ export default {
   },
   contentView: {
     backgroundColor: white,
-    minHeight: height - headerHeight - footerHeight - statusbarHeight,
+    minHeight: height - headerHeight - statusbarHeight,
     justifyContent: 'center',
   },
   button: {

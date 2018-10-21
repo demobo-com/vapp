@@ -6,6 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import {
   Header,
   Left,
@@ -14,51 +15,46 @@ import {
   Button,
   Title,
   Icon,
-  Text,
 } from 'native-base';
-import { Actions } from 'react-native-router-flux';
-
-import { translate } from 'utils/helpers';
 
 import styles from './styles';
 
 const AppHeader = (props) => {
   const {
-    title, hasLeft, hasRight, hasTitle, backMessage, leftPress, rightPress,
+    title, hasLeft, hasRight, hasTitle,
+    leftIcon, rightIcon, leftPress, rightPress,
   } = props;
 
   const leftButton = (
-    <Button
-      onPress={leftPress}
-      style={styles.button}
-    >
-      <Icon name="arrow-back" />
-      <Text>{translate(backMessage)}</Text>
-    </Button>
+    <Left>
+      <Button
+        onPress={leftPress}
+        style={styles.button}
+      >
+        <Icon name={leftIcon} />
+        {/* <Text>{translate(backMessage)}</Text> */}
+      </Button>
+    </Left>
   );
   const rightButton = (
-    <Button
-      onPress={rightPress}
-      style={styles.button}
-    >
-      <Icon ios="ios-menu" android="md-menu" />
-    </Button>
+    <Right>
+      <Button
+        onPress={rightPress}
+        style={styles.button}
+      >
+        {rightIcon && <Icon name={rightIcon} />}
+      </Button>
+    </Right>
   );
   const titleBody = (
-    <Title>{title}</Title>
+    <Body><Title>{title}</Title></Body>
   );
 
   return (
     <Header style={styles.headerStyle}>
-      <Left>
-        { hasLeft && leftButton }
-      </Left>
-      <Body>
-        { hasTitle && titleBody }
-      </Body>
-      <Right>
-        { hasRight && rightButton }
-      </Right>
+      { hasLeft && leftButton }
+      { hasTitle && titleBody }
+      { hasRight && rightButton }
     </Header>
   );
 };
@@ -68,9 +64,11 @@ AppHeader.defaultProps = {
   hasLeft: true,
   hasTitle: true,
   hasRight: true,
-  backMessage: 'back',
+  // backMessage: 'back',
+  leftIcon: 'arrow-back',
+  rightIcon: '',
   leftPress: () => Actions.pop(),
-  rightPress: () => alert('OK'),// eslint-disable-line
+  rightPress: () => null,
 };
 
 AppHeader.propTypes = {
@@ -78,7 +76,9 @@ AppHeader.propTypes = {
   hasLeft: PropTypes.bool,
   hasTitle: PropTypes.bool,
   hasRight: PropTypes.bool,
-  backMessage: PropTypes.string,
+  // backMessage: PropTypes.string,
+  leftIcon: PropTypes.string,
+  rightIcon: PropTypes.string,
   leftPress: PropTypes.func,
   rightPress: PropTypes.func,
 };

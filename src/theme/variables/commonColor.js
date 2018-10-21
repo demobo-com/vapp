@@ -305,6 +305,7 @@ module.exports = {
   */
   grey: '#E8E8E8',
   darkGrey: '#999999',
+  greyer: '#E6E6E6',
   blue: '#007AFF',
   lightBlue: '#039BE5',
   green: '#43A047',
