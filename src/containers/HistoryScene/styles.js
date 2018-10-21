@@ -1,33 +1,65 @@
-import { Dimensions } from 'react-native';
-import { grey200, white } from 'commonColor';
+import * as commonColor from 'commonColor';
 
 import variables from 'platform';
 
-const { height } = Dimensions.get('window');
-const { headerHeight, statusbarHeight } = variables;
+const {
+  deviceHeight,
+  deviceWidth,
+  headerHeight,
+  statusbarHeight,
+} = variables;
 
 export default {
   contentContainer: {
-    justifyContent: 'center',
+    minHeight: deviceHeight - headerHeight - statusbarHeight,
+    backgroundColor: commonColor.white,
+    flexDirection: 'row',
   },
   content: {
-    backgroundColor: grey200,
+    backgroundColor: commonColor.white,
   },
-  contentView: {
-    backgroundColor: white,
-    minHeight: height - headerHeight - statusbarHeight,
+
+  list: {
+    flexShrink: 0,
+    flexGrow: 0,
+    width: deviceWidth / 3,
+    height: deviceHeight - headerHeight,
+    borderRightWidth: 0.5,
+    borderRightColor: commonColor.darkGrey,
+  },
+  listItem: {
+    marginLeft: 0,
+    paddingRight: 0,
     justifyContent: 'center',
+    flexDirection: 'column',
+  },
+  month: {
+    lineHeight: 40,
   },
   button: {
-    alignSelf: 'center',
-    marginBottom: 10,
-  },
-  footerTble: {
+    backgroundColor: 'transparent',
+    width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
   },
-  generateText: {
+  buttonText: {
+    color: commonColor.black,
+  },
+
+  currentTime: {
+    fontSize: 15,
+    paddingLeft: 15,
+    marginTop: 20,
+  },
+
+  webView: {
+    width: 300,
+    overflow: 'hidden',
+  },
+
+  total: {
+    position: 'absolute',
+    width: deviceWidth * 2 / 3,
     textAlign: 'center',
-    marginVertical: 10,
+    top: 400,
   },
 };
