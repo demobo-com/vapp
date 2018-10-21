@@ -1,35 +1,43 @@
-import { Dimensions } from 'react-native';
-import { grey200, white } from 'commonColor';
-
+import * as commonColor from 'commonColor';
 import variables from 'platform';
 
-const { height } = Dimensions.get('window');
-const { headerHeight, footerHeight, statusbarHeight } = variables;
+const { deviceHeight, headerHeight } = variables;
 
 export default {
   contentContainer: {
-    justifyContent: 'center',
+    backgroundColor: commonColor.white,
+    paddingHorizontal: 16,
+    height: deviceHeight - headerHeight,
   },
   content: {
-    backgroundColor: grey200,
+    backgroundColor: commonColor.white,
   },
-  contentView: {
-    backgroundColor: white,
-    minHeight: height - headerHeight - footerHeight - statusbarHeight,
-    justifyContent: 'center',
+
+  balance: {
+    fontSize: 32,
+    textAlign: 'center',
+    fontWeight: '700',
+    marginTop: 20,
+    marginBottom: 20,
   },
-  button: {
-    alignSelf: 'center',
-    marginBottom: 10,
-    minWidth: 150,
-    justifyContent: 'space-evenly',
-  },
-  footerTble: {
+
+  rechargeLine: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
   },
-  generateText: {
-    textAlign: 'center',
-    marginVertical: 10,
+  input: {
+    borderWidth: 0.5,
+    borderColor: commonColor.darkGrey,
+    borderRadius: 8,
+    marginRight: 20,
+    height: 45,
+  },
+  button: {
+    width: 80,
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
 };
