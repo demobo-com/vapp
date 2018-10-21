@@ -190,7 +190,7 @@ export class HomeScene extends React.Component { // eslint-disable-line
     return (
       <Container>
         <AppHeader
-          title=""
+          title="ViSync"
           leftIcon="md-settings"
           rightIcon="md-menu"
           leftPress={() => Actions.push('settings')}

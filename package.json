@@ -29,6 +29,7 @@
     ]
   },
   "dependencies": {
+    "buffer": "^5.2.1",
     "hoist-non-react-statics": "^2.5.5",
     "immutable": "^3.8.2",
     "install": "^0.12.2",

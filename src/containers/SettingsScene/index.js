@@ -16,6 +16,8 @@ import {
   ListItem,
   Switch,
   List,
+  View,
+  Input,
 } from 'native-base';
 
 import AppHeader from 'components/AppHeader';
@@ -30,6 +32,8 @@ export class SettingsScene extends React.Component { // eslint-disable-line
     DATA_LIST.map((item) => initialValue.push(item.value));
     this.state = {
       dataList: initialValue,
+      monthlyCashWithdrawal: 100,
+      percentage: 10,
     };
   }
 
@@ -60,6 +64,7 @@ export class SettingsScene extends React.Component { // eslint-disable-line
   }
 
   render() {
+    const { monthlyCashWithdrawal, percentage } = this.state;
     return (
       <Container>
         <AppHeader title="" />
@@ -69,14 +74,28 @@ export class SettingsScene extends React.Component { // eslint-disable-line
           style={styles.content}
           scrollEnabled={false}
         >
-          <Text style={styles.limitNote}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.limitNote}>
             Monthly Cash Withdrawal Allowance:
-            <Text style={styles.importNote}> $100.00</Text>
-          </Text>
-          <Text style={styles.limitNote}>
+              <Text style={styles.importNote}> $</Text>
+            </Text>
+            <Input
+              style={styles.input}
+              value={Number(monthlyCashWithdrawal).toFixed(2)}
+              onChangeText={(value) => this.setState({ monthlyCashWithdrawal: value })}
+            />
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.limitNote}>
             Direct Deposit to Savings Account:
-            <Text style={styles.importNote}> 10%</Text>
-          </Text>
+            </Text>
+            <Input
+              style={styles.percentageInput}
+              value={percentage.toString()}
+              onChangeText={(value) => this.setState({ percentage: value })}
+            />
+            <Text style={styles.importNote}>%</Text>
+          </View>
           { this.renderSettingsList() }
         </Content>
       </Container>
