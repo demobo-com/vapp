@@ -31,12 +31,15 @@ import {
 } from './constants';
 import styles from './styles';
 
+const currentYear = new Date().getFullYear();
+const currentMonth = new Date().getMonth() + 1;
+
 export class HistoryScene extends React.Component { // eslint-disable-line
   constructor(props) {
     super(props);
     this.state = {
       selectYear: '2018',
-      selectMonth: 'October',
+      selectMonth: '9',
       series: this.getSeries(),
     };
   }
@@ -50,7 +53,11 @@ export class HistoryScene extends React.Component { // eslint-disable-line
   }
 
   onChangeYear=(item) => {
+    const { selectMonth } = this.state;
     this.setState({ selectYear: item });
+    if (Number(item) === currentYear && Number(selectMonth) > currentMonth) {
+      this.onChangeMonth(currentMonth - 1);
+    }
     this.onChangeSeries();
   }
 
@@ -74,6 +81,8 @@ export class HistoryScene extends React.Component { // eslint-disable-line
 
   renderSideBar = () => {
     const { selectYear, selectMonth } = this.state;
+
+    const getYearMonth = Number(selectYear) < currentYear ? MONTH : MONTH.slice(12 - currentMonth);
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -99,8 +108,8 @@ export class HistoryScene extends React.Component { // eslint-disable-line
               >
                 <Text style={activeYearTextStyles}>{item}</Text>
               </Button>
-              {isActive && MONTH.map((month) => {
-                const isActiveMonth = selectMonth === month;
+              {isActive && getYearMonth.map((month, monthIndex) => {
+                const isActiveMonth = Number(selectMonth) === getYearMonth.length - 1 - monthIndex;
                 const monthStyles = [styles.month];
                 if (isActiveMonth) {
                   monthStyles.push(styles.activeMonth);
@@ -109,7 +118,7 @@ export class HistoryScene extends React.Component { // eslint-disable-line
                   <Text
                     key={month}
                     style={monthStyles}
-                    onPress={() => this.onChangeMonth(month)}
+                    onPress={() => this.onChangeMonth(getYearMonth.length - 1 - monthIndex)}
                   >{month}
                   </Text>
                 );
@@ -158,7 +167,7 @@ export class HistoryScene extends React.Component { // eslint-disable-line
         >
           { this.renderSideBar() }
           <View style={styles.rightPart}>
-            <Text style={styles.currentTime}>{selectMonth},{selectYear}</Text>
+            <Text style={styles.currentTime}>{MONTH[MONTH.length - 1 - Number(selectMonth)]},{selectYear}</Text>
             { this.renderPieChart() }
             { this.renderPieChartDescription() }
             <Text style={styles.total}>Total Savings：$108.66</Text>
